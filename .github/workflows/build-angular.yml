@@ -1,0 +1,24 @@
+name: Angular CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm build:ci
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: angular-web-app-basic
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./dist/angular-application
