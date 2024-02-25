@@ -25,4 +25,4 @@ jobs:
         with:
           app-name: angular-web-app-basic
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ./dist/angular-application
+          package: ./src/angular-application/dist/angular-application
