@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npm build:ci
+      - run: npm build
       - uses: azure/webapps-deploy@v2
         with:
           app-name: angular-web-app-basic
