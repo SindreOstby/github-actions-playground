@@ -1,8 +1,10 @@
 name: Angular CI/CD
 
 on:
+  push:
+    branches: [main]
   release:
-    types: [published]
+      types: [published]
 
 defaults:
   run:
@@ -22,7 +24,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      - uses: azure/webapps-deploy@v3
+      - uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
