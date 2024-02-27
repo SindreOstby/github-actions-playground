@@ -1,10 +1,10 @@
-name: Angular CI/CD
+name: Angular CI
 
 on:
   push:
     branches: [main]
   release:
-      types: [published]
+    types: [published]
 
 defaults:
   run:
@@ -15,16 +15,24 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: './src/angular-application/dist/angular-application/browser'
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Use Node.js v20
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
-      - uses: azure/webapps-deploy@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
