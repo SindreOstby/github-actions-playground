@@ -3,7 +3,7 @@ name: Angular CI
 on:
   push:
     branches: [main]
-    paths: [src/angular-application]
+    paths: [src/angular-application/**]
   release:
     types: [published]
 
