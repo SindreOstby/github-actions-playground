@@ -10,13 +10,12 @@ defaults:
   run:
     working-directory: ./src/angular-application
 
-env:
-  AZURE_WEBAPP_NAME: angular-web-app-basic
-  AZURE_WEBAPP_PACKAGE_PATH: './src/angular-application/dist/angular-application/browser'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://angular-web-app-basic.azurewebsites.net/
     steps:
       - uses: actions/checkout@v4
 
